@@ -522,7 +522,7 @@ function HardwarePlayer() {
         <p className="truncate text-[11px] font-bold uppercase tracking-[0.22em] text-[#FF5A1F]">
           {currentTrack.title}
         </p>
-        <div className="mt-3 grid grid-cols-[1fr_auto] items-end gap-3">
+        <div className="mt-3 grid grid-cols-[minmax(0,1fr)_auto] items-end gap-3">
           <div className="waveform" style={{ "--progress": `${progress}%` } as React.CSSProperties}>
             {Array.from({ length: 18 }).map((_, index) => (
               <span key={`wave-${index}`} style={{ height: `${18 + ((index * 11) % 30)}px` }} />
@@ -631,7 +631,7 @@ function TrackList() {
                 {String(track.playlistIndex + 1).padStart(2, "0")}
               </span>
               <span
-                className="block aspect-square border-4 border-[#FF5A1F] bg-cover bg-center"
+                className="block aspect-square border-4 border-[#FF5A1F] bg-cover bg-center shrink-0"
                 style={
                   track.thumbnail
                     ? { backgroundImage: `url(${track.thumbnail})` }
@@ -641,13 +641,13 @@ function TrackList() {
                       }
                 }
               />
-              <span>
-                <span className="block text-sm font-black uppercase tracking-[0.12em]">{title}</span>
-                <span className="mt-1 block text-[10px] font-bold uppercase tracking-[0.22em]">
+              <span className="min-w-0 overflow-hidden">
+                <span className="block truncate text-sm font-black uppercase tracking-[0.12em]">{title}</span>
+                <span className="mt-1 block truncate text-[10px] font-bold uppercase tracking-[0.22em]">
                   {active && isPlaying ? "REEL ACTIVE" : "TAPE QUEUED"}
                 </span>
               </span>
-              <span className={`reel ${active && isPlaying ? "reel-spinning" : ""}`} />
+              <span className={`reel shrink-0 ${active && isPlaying ? "reel-spinning" : ""}`} />
             </button>
           );
         })}

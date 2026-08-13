@@ -172,17 +172,17 @@ export function FrameGenerator({
         </section>
       ) : null}
 
-      <section id="builder" className="px-5 py-16 md:px-10 md:py-20">
+      <section id="builder" className="w-full px-5 py-16 md:px-10 md:py-20">
         {embedded ? (
           <div className="mb-6 border-b-4 border-[#FF5A1F] pb-3 text-[11px] font-black uppercase tracking-[0.28em]">
             03 / UPLOAD YOUR PHOTO
           </div>
         ) : null}
         <div className="grid gap-8 border-b-4 border-[#FF5A1F] pb-10 lg:grid-cols-[0.84fr_1.16fr]">
-          <div>
-            <div className="mb-5 flex items-center justify-between border-b-4 border-[#FF5A1F] pb-3 text-[11px] font-bold uppercase tracking-[0.28em]">
+          <div className="min-w-0">
+            <div className="mb-5 flex flex-col items-start gap-2 border-b-4 border-[#FF5A1F] pb-3 text-[11px] font-bold uppercase tracking-[0.28em] sm:flex-row sm:items-center sm:justify-between">
               <span>No.02 / Format</span>
-              <span>Tap to switch</span>
+              <span className="sm:text-right">Tap to switch</span>
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
@@ -210,7 +210,7 @@ export function FrameGenerator({
               />
 
               <button
-                className={`poster-panel min-h-48 w-full border-dashed p-6 text-left transition ${
+                className={`poster-panel w-full min-w-0 break-words border-dashed p-6 text-left transition sm:min-h-48 ${
                   isDragging
                     ? "border-solid bg-[#FF5A1F] text-white"
                     : "bg-[#0B6839] text-white"
@@ -229,10 +229,10 @@ export function FrameGenerator({
                   void handleFile(event.dataTransfer.files[0]);
                 }}
               >
-                <span className="font-display block text-4xl uppercase leading-none md:text-5xl">
+                <span className="font-display block text-[clamp(1.75rem,8vw,3rem)] uppercase leading-none md:text-5xl">
                   Drop photo here
                 </span>
-                <span className="mt-4 block text-sm font-bold uppercase tracking-[0.18em]">
+                <span className="mt-4 block text-xs font-bold uppercase tracking-[0.18em] sm:text-sm">
                   JPG / PNG / HEIC accepted
                 </span>
               </button>
@@ -240,9 +240,9 @@ export function FrameGenerator({
 
             {imageUrl ? (
               <div className="mt-8">
-                <div className="mb-3 flex items-center justify-between text-[11px] font-bold uppercase tracking-[0.24em]">
+                <div className="mb-3 flex flex-col items-start gap-2 text-[11px] font-bold uppercase tracking-[0.24em] sm:flex-row sm:items-center sm:justify-between">
                   <span>Crop / Reposition</span>
-                  <span>{Math.round(zoom * 100)}%</span>
+                  <span className="sm:text-right">{Math.round(zoom * 100)}%</span>
                 </div>
                 <div className="cropper-shell poster-panel relative aspect-square bg-[#0B6839]">
                   <Cropper
@@ -276,10 +276,10 @@ export function FrameGenerator({
             ) : null}
           </div>
 
-          <div>
-            <div className="mb-5 grid grid-cols-2 border-b-4 border-[#FF5A1F] pb-3 text-[11px] font-bold uppercase tracking-[0.28em]">
+          <div className="min-w-0">
+            <div className="mb-5 flex flex-col items-start gap-2 border-b-4 border-[#FF5A1F] pb-3 text-[11px] font-bold uppercase tracking-[0.28em] sm:flex-row sm:items-center sm:justify-between">
               <span>No.03 / Preview</span>
-              <span className="text-right">{canvasSize.width}x{canvasSize.height} PNG</span>
+              <span className="sm:text-right">{canvasSize.width}x{canvasSize.height} PNG</span>
             </div>
 
             {format === "id-card" ? (
@@ -311,10 +311,10 @@ export function FrameGenerator({
                   />
                 ) : (
                   <div
-                    className="grid min-h-[420px] place-items-center bg-[#0B6839] p-8 text-center text-white"
+                    className="grid w-full place-items-center bg-[#0B6839] p-6 text-center text-white"
                     style={{ aspectRatio: `${canvasSize.width} / ${canvasSize.height}` }}
                   >
-                    <p className="font-display max-w-md text-5xl uppercase leading-[0.88]">
+                    <p className="font-display max-w-sm text-[clamp(2rem,6vw,3rem)] uppercase leading-[0.88]">
                       Upload to generate your frame
                     </p>
                   </div>
@@ -386,7 +386,7 @@ function FormatButton({
 }) {
   return (
     <button
-      className={`poster-panel grid min-h-40 grid-cols-[1fr_96px] gap-4 p-4 text-left transition ${
+      className={`poster-panel grid min-h-40 w-full grid-cols-[minmax(0,1fr)_64px] gap-4 p-4 text-left transition sm:grid-cols-[minmax(0,1fr)_96px] ${
         active
           ? "bg-[#FF5A1F] text-white"
           : "bg-[#0B6839] text-white hover:bg-[#FF5A1F]"
@@ -394,9 +394,9 @@ function FormatButton({
       type="button"
       onClick={onClick}
     >
-      <span>
-        <span className="font-display block text-4xl uppercase leading-none">{label}</span>
-        <span className="mt-3 block text-[11px] font-bold uppercase tracking-[0.2em]">
+      <span className="min-w-0 break-words">
+        <span className="font-display block text-[clamp(1.75rem,8vw,2.25rem)] uppercase leading-none">{label}</span>
+        <span className="mt-3 block text-[10px] font-bold uppercase tracking-[0.2em] sm:text-[11px]">
           {meta}
         </span>
       </span>
