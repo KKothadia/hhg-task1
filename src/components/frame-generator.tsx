@@ -249,7 +249,7 @@ export function FrameGenerator({
                     image={imageUrl}
                     crop={crop}
                     zoom={zoom}
-                    aspect={1}
+                    aspect={format === "pfp" ? 1 : 1020 / 680}
                     minZoom={1}
                     maxZoom={4}
                     onCropChange={setCrop}
@@ -258,7 +258,9 @@ export function FrameGenerator({
                     showGrid={false}
                     restrictPosition
                   />
-                  <div className="pointer-events-none absolute inset-[11%] z-10 rounded-full border-2 border-[#FFFAF2] shadow-[0_0_0_9999px_rgba(15,18,16,0.26)]" />
+                  {format === "pfp" ? (
+                    <div className="pointer-events-none absolute inset-[11%] z-10 rounded-full border-2 border-[#FFFAF2] shadow-[0_0_0_9999px_rgba(15,18,16,0.26)]" />
+                  ) : null}
                 </div>
                 <input
                   aria-label="Zoom"
